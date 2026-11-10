@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de" class="js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F2F1EA">
+<title>Portfolio | Olena Kliuiko</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #34211B;
+  --brown: #34211B;
+  --olive-deep: #34211B;
+  --olive: #A0BEDA;
+  --sage: #A0BEDA;
+  --paper: #F2F1EA;
+  --outer: clamp(22px, 5vw, 76px);
+  --line: #A0BEDA;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Manrope, Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--olive-deep); outline-offset: 4px; }
+.page { max-width: 1680px; margin: auto; padding: 0 var(--outer); }
+.mini { font-size: clamp(11px,.9vw,13px); font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 38px 0 0; }
+.top p { margin: 0; }
+.top .lang { color: #A0BEDA; border: 1px solid #A0BEDA; border-radius: 100px; padding: 7px 12px; }
+.hero { padding: clamp(74px,9vw,128px) 0 clamp(94px,10vw,150px); }
+.hero h1 { margin: 0; font-size: clamp(62px, 10.2vw, 142px); font-family: "DM Serif Display", Georgia, serif; font-weight: 400; letter-spacing: -.035em; line-height: 1.02; text-transform: none; }
+.hero h1 span { display: block; }
+.hero .intro { max-width: 520px; margin: clamp(34px, 3vw, 48px) 0 0; font-size: clamp(18px, 1.75vw, 25px); font-weight: 600; line-height: 1.5; color: var(--brown); }
+.hero .accent { display: inline-block; width: 62px; height: 7px; background: #A0BEDA; vertical-align: middle; margin-right: 16px; }
+.section-top { display: flex; justify-content: space-between; align-items: end; margin: 0 0 20px; gap: 24px; }
+.section-top h2 { margin: 0; }
+.counter { color: var(--olive); }
+.project-list { position:relative; border-top: 2px solid var(--olive); }
+.project-list::before { content:""; position:absolute; left:0; right:0; top:0; height:var(--hover-height,0px); background:#A0BEDA; transform:translateY(var(--hover-y,0px)); opacity:0; pointer-events:none; transition:transform .42s cubic-bezier(.22,.8,.2,1),height .42s cubic-bezier(.22,.8,.2,1),opacity .25s ease; }
+.project-list.is-hovered::before { opacity:1; }
+.project-row { position:relative; isolation:isolate; overflow:hidden; display: grid; grid-template-columns: minmax(42px,.6fr) minmax(0,5fr) minmax(0,3.7fr) minmax(110px,1.6fr); gap: clamp(12px,2vw,28px); align-items: center; min-height: clamp(105px, 11vw, 150px); padding: 24px clamp(10px, 1.4vw, 22px); border-bottom: 1px solid var(--line); transition: color .35s ease, opacity .7s cubic-bezier(.22,.8,.2,1), transform .7s cubic-bezier(.22,.8,.2,1); }
+.project-row:hover, .project-row:focus-visible { color: #34211B; border-bottom-color: #34211B; }
+
+.project-row > * { position:relative; z-index:1; }
+
+.project-num { font-size: clamp(16px,1.5vw,21px); font-weight: 800; font-style: italic; color: var(--olive-deep); }
+.project-name { font-size: clamp(24px, 3.2vw, 48px); font-weight: 800; text-transform: uppercase; letter-spacing: -.06em; line-height: 1.05; transition:transform .55s cubic-bezier(.22,.8,.2,1); }
+.project-desc { font-size: clamp(11px,.95vw,14px); font-weight: 700; text-transform: uppercase; line-height: 1.55; color: var(--olive-deep); }
+.tag { justify-self: end; white-space: nowrap; border: 1px solid var(--olive-deep); padding: 9px 14px; border-radius: 100px; color: var(--olive-deep); font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.project-row:hover .project-num, .project-row:hover .project-desc, .project-row:hover .tag, .project-row:focus-visible .project-num, .project-row:focus-visible .project-desc, .project-row:focus-visible .tag { color: #34211B; border-color: #34211B; }
+.projects { padding-bottom: clamp(115px, 13vw, 195px); }
+footer { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 34px; border-top: 3px solid var(--olive); padding: 45px 0 85px; }
+.footer-heading { color: var(--olive-deep); margin: 0 0 24px; }
+.footer-copy { font-size: 14px; line-height: 1.7; font-weight: 600; color: var(--olive-deep); }
+.footer-end { text-align: right; }
+.footer-end .mark { font-size: 50px; color: #A0BEDA; font-weight: 800; line-height: 1; margin-top: 30px; }
+@media (max-width: 900px) {
+  .project-row { grid-template-columns: 40px minmax(0,1fr) auto; gap: 10px 16px; }
+  .project-desc { grid-column: 2 / 4; grid-row: 2; }
+  .tag { grid-column: 3; grid-row: 1; }
+  .project-name { font-size: clamp(23px,3.5vw,34px); }
+  footer { grid-template-columns: 1fr 1fr; }
+  .footer-end { text-align: left; }
+}
+@media (max-width: 600px) {
+  .top { padding-top: 25px; }
+  .hero { padding: 76px 0 100px; }
+  .hero h1 { font-size: clamp(39px, 10vw, 68px); letter-spacing: -.035em; }
+  .hero .intro { font-size: 18px; margin-top: 30px; }
+  .project-row { min-height: 110px; grid-template-columns: 35px minmax(0,1fr); padding: 20px 8px; }
+  .project-name { grid-column: 2; grid-row: 1; font-size: clamp(21px,5.2vw,29px); }
+  .project-num { grid-column: 1; grid-row: 1; }
+  .project-desc { grid-column: 2; grid-row: 2; }
+  .tag { grid-column: 2; grid-row: 3; justify-self: start; margin-top: 4px; }
+  footer { grid-template-columns: 1fr; padding-bottom: 55px; }
+  .footer-end { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .project-row { transition: none; } }
+.language-switch { display:flex; gap:5px; align-items:center; }
+.language-switch button { border:1px solid #A0BEDA; background:transparent; color:#A0BEDA; border-radius:50px; padding:8px 11px; font:800 12px Manrope,Arial,sans-serif; cursor:pointer; }
+.language-switch button[aria-pressed="true"] { background:#A0BEDA; color:#34211B; }
+.language-switch button:focus-visible { outline:2px solid #34211B; outline-offset:3px; }
+.hero h1 span { overflow:hidden; }
+.js .hero h1 span { transform:translateY(110%); opacity:0; transition:transform 1s cubic-bezier(.22,.8,.2,1),opacity .8s; }
+.js.ready .hero h1 span { transform:none; opacity:1; }
+.js .hero h1 span:nth-child(2) { transition-delay:.13s; }
+.js .hero .intro { opacity:0; transform:translateY(12px); transition:opacity .8s .45s,transform .8s .45s; }
+.js.ready .hero .intro { opacity:1; transform:none; }
+.js .project-row:not(.in) { opacity:0; transform:translateY(15px); }
+@media (prefers-reduced-motion:reduce) { .js .hero h1 span,.js .hero .intro,.js .project-row:not(.in) { opacity:1;transform:none;transition:none; } .project-row::before,.project-name { transition:none!important; } }
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top">
+  <p class="mini"><span data-i18n="0">Portfolio / 2026</span></p>
+  <nav class="language-switch" aria-label="Language"><button type="button" data-lang="de" aria-pressed="true">DE</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="uk" aria-pressed="false">UA</button></nav>
+</header>
+<section class="hero" aria-label="Introduction">
+  <h1><span>Olena</span><span>Kliuiko</span></h1>
+  <p class="intro"><span class="accent" aria-hidden="true"></span><span data-i18n="1">Hier folgt eine kurze Vorstellung: Wer sie ist, was sie macht und welchen Mehrwert sie bietet.</span></p>
+</section>
+<main>
+<section class="projects" id="projects" aria-label="Selected projects">
+  <div class="section-top"><h2 class="mini"><span data-i18n="2">Ausgewählte Projekte</span></h2><span class="mini counter">01 / 05</span></div>
+  <div class="project-list">
+    <a class="project-row" href="project-05.html"><span class="project-num">05</span><span class="project-name"><span data-i18n="3">Projekt fünf</span></span><span class="project-desc"><span data-i18n="8">Titel und Beschreibung folgen</span></span><span class="tag"><span data-i18n="9">Projekt</span></span></a>
+    <a class="project-row" href="project-04.html"><span class="project-num">04</span><span class="project-name"><span data-i18n="4">Alphabet</span></span><span class="project-desc"><span data-i18n="8">Titel und Beschreibung folgen</span></span><span class="tag"><span data-i18n="10">Design</span></span></a>
+    <a class="project-row" href="project-03.html"><span class="project-num">03</span><span class="project-name"><span data-i18n="5">Sommer in Lissabon</span></span><span class="project-desc"><span data-i18n="8">Titel und Beschreibung folgen</span></span><span class="tag"><span data-i18n="11">Fallstudie</span></span></a>
+    <a class="project-row" href="project-02.html"><span class="project-num">02</span><span class="project-name"><span data-i18n="6">Stilles Haus</span></span><span class="project-desc"><span data-i18n="8">Titel und Beschreibung folgen</span></span><span class="tag"><span data-i18n="11">Fallstudie</span></span></a>
+    <a class="project-row" href="project-01.html"><span class="project-num">01</span><span class="project-name"><span data-i18n="7">Nordlicht</span></span><span class="project-desc"><span data-i18n="8">Titel und Beschreibung folgen</span></span><span class="tag"><span data-i18n="9">Projekt</span></span></a>
+  </div>
+</section>
+</main>
+<footer id="contact">
+  <div><h2 class="mini footer-heading"><span data-i18n="12">Kontakt</span></h2><p class="footer-copy"><span data-i18n="13">Kontaktlinks folgen</span></p></div>
+  <div><h2 class="mini footer-heading"><span data-i18n="14">Schwerpunkte</span></h2><p class="footer-copy"><span data-i18n="15">Hier stehen künftig die wichtigsten Kompetenzen und Tätigkeitsbereiche.</span></p></div>
+  <div class="footer-end"><p class="footer-copy">© 2026 Olena Kliuiko</p><div class="mark" aria-hidden="true">✳</div></div>
+</footer>
+</div>
+<script>
+const translations = {"de":["Portfolio / 2026","Hier folgt eine kurze Vorstellung: Wer sie ist, was sie macht und welchen Mehrwert sie bietet.","Ausgewählte Projekte","Projekt fünf","Alphabet","Sommer in Lissabon","Stilles Haus","Nordlicht","Titel und Beschreibung folgen","Projekt","Design","Fallstudie","Kontakt","Kontaktlinks folgen","Schwerpunkte","Hier stehen künftig die wichtigsten Kompetenzen und Tätigkeitsbereiche."],"en":["Portfolio / 2026","A short introduction will go here: who she is, what she does, and the value she brings.","Selected projects","Project Five","Alphabet","Summer in Lisbon","Quiet Home","Northern Lights","Title and description to be confirmed","Project","Design","Case study","Contact","Contact links coming soon","Expertise","Key skills and areas of work will appear here."],"uk":["Портфоліо / 2026","Тут буде коротка розповідь: хто вона, чим займається та яку користь приносить клієнтам.","Вибрані проєкти","Проєкт п’ять","Абетка","Літо в Лісабоні","Тихий дім","Північне сяйво","Назву й опис уточнимо","Проєкт","Дизайн","Кейс","Контакти","Контактні посилання додамо пізніше","Спеціалізація","Тут будуть основні навички та напрями роботи."]};
+function setLanguage(lang) {
+  if (!translations[lang]) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = translations[lang][Number(el.dataset.i18n)]; });
+  document.querySelectorAll('[data-lang]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === lang)));
+  document.title = translations[lang][0].split(' / ')[0] + ' | Olena Kliuiko';
+  try { localStorage.setItem('portfolio-language', lang); } catch(e) {}
+}
+document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
+let saved = 'de'; try { saved = localStorage.getItem('portfolio-language') || 'de'; } catch(e) {}
+setLanguage(saved);
+</script>
+<script>
+(function(){
+const ready=()=>document.documentElement.classList.add('ready');
+if(document.readyState==='complete')requestAnimationFrame(ready);else window.addEventListener('load',()=>requestAnimationFrame(ready),{once:true});
+setTimeout(ready,1200);
+const rows=[...document.querySelectorAll('.project-row')];
+const list=document.querySelector('.project-list');
+let hoverFrame;
+function moveHighlight(row){const listRect=list.getBoundingClientRect(),rect=row.getBoundingClientRect();list.style.setProperty('--hover-y',(rect.top-listRect.top)+'px');list.style.setProperty('--hover-height',rect.height+'px');list.classList.add('is-hovered');}
+rows.forEach(row=>{row.addEventListener('mouseenter',()=>moveHighlight(row));row.addEventListener('focus',()=>moveHighlight(row));});
+list.addEventListener('mouseleave',()=>list.classList.remove('is-hovered'));
+list.addEventListener('focusout',e=>{if(!list.contains(e.relatedTarget))list.classList.remove('is-hovered')});
+if('IntersectionObserver' in window){let n=0;const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;entry.target.style.transitionDelay=((n++%5)*65)+'ms';entry.target.classList.add('in');observer.unobserve(entry.target);});},{threshold:.1});rows.forEach(row=>observer.observe(row));}else rows.forEach(row=>row.classList.add('in'));
+setTimeout(()=>rows.forEach(row=>row.classList.add('in')),3500);
+})();
+</script>
+</body>
+</html>
